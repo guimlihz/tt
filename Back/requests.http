@@ -1,0 +1,31 @@
+### GET de um post
+GET http://localhost:5001/users
+
+### POST de um novo post
+POST http://localhost:5001/api/auth/register
+Content-Type: application/json
+
+/*COMANDO À EXECUTAR DEPOIS QUE RODAR O BANCO*/
+
+/*LISTAR USUÁRIOS*/
+
+curl http://localhost:5001/api/users
+
+/*ADICIONAR USUÁRIOS*/
+
+curl -X POST http://localhost:5001/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username": "caiotest", "email": "caio@exemplo.com", "password": "senha12", "age": 22, "weight": 80, "height": 168, "goal": "Hipertrofia", "availability": "3 dias"}'
+
+
+/*ATUALIZA O USUÁRIO*/
+
+curl -X PUT http://localhost:5001/api/users/<coloca o id do usuário> \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "caioTeste"
+  }'
+
+/*DELETA O USUÁRIO*/
+
+curl -X DELETE http://localhost:5001/api/users/<coloca o id do usuario>
