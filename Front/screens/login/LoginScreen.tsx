@@ -1,11 +1,11 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Alert, Image, Text, TextInput, TouchableOpacity, View, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './style';
 
-
 const logoImage = require('@/assets/images/logo.png');
+
 const LoginScreen: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -21,52 +21,36 @@ const LoginScreen: React.FC = () => {
 
     setIsLoading(true);
 
-    const loginData = {
-      email: email.trim().toLowerCase(),
-      password: password,
-    };
-
     try {
-      // Use o endpoint de LOGIN da sua API (ex: /api/auth/login)
-      const response = await fetch('http://localhost:5001/api/auth/login', { // <<< CERTIFIQUE-SE QUE ESTE É SEU ENDPOINT DE LOGIN
+      const response = await fetch('http://localhost:5001/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          password: password,
+        }),
       });
 
       const responseData = await response.json();
       setIsLoading(false);
 
       if (response.ok && responseData.token) {
-        // Sucesso no login
-        Alert.alert('Login Bem-sucedido!', responseData.message || `Bem-vindo!`);
-
-        // 1. Salvar o token JWT no AsyncStorage
         await AsyncStorage.setItem('userToken', responseData.token);
 
-
-         if (responseData.user) {
-           try {
-             await AsyncStorage.setItem('userData', JSON.stringify(responseData.user));
-             // Você também pode querer colocar isso em um estado global/contexto
-           } catch (e) {
-             console.error("Erro ao salvar dados do usuário no AsyncStorage", e);
-           }
-         }
+        if (responseData.user) {
+          await AsyncStorage.setItem('userData', JSON.stringify(responseData.user));
+        }
         
-        // 3. Navegar para a tela AiPromptScreen
         router.replace('/aiPrompt');
-
       } else {
-        // Erro no login
-        Alert.alert('Erro de Login', responseData.message || `Erro ${response.status}: Credenciais inválidas ou usuário não encontrado.`);
+        Alert.alert('Erro de Login', responseData.message || 'Credenciais inválidas.');
       }
     } catch (error) {
       setIsLoading(false);
       console.error('Erro na requisição de login:', error);
-      Alert.alert('Erro de Rede', 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.');
+      Alert.alert('Erro de Rede', 'Não foi possível conectar ao servidor. Verifique sua conexão.');
     }
   };
 
@@ -75,7 +59,10 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <Image
         source={logoImage}
         style={styles.logo}
@@ -84,23 +71,25 @@ const LoginScreen: React.FC = () => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Email:"
-          placeholderTextColor="#A0A0A0"
+          placeholder="Email"
+          placeholderTextColor="#666666"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
+          autoCorrect={false}
         />
       </View>
 
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Senha:"
-          placeholderTextColor="#A0A0A0"
+          placeholder="Senha"
+          placeholderTextColor="#666666"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={!isPasswordVisible}
+          autoCapitalize="none"
         />
         <TouchableOpacity
           style={styles.eyeIconContainer}
@@ -113,17 +102,17 @@ const LoginScreen: React.FC = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#FFFFFF" style={{marginVertical: 15}}/>
       ) : (
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
-      )}
-
-      {!isLoading && (
-          <TouchableOpacity style={styles.signUpButton} onPress={handleNavigateToSignUp}>
-            <Text style={styles.signUpButtonText}>Cadastrar-se</Text>
+        <>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+            <Text style={styles.loginButtonText}>Entrar</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.signUpButton} onPress={handleNavigateToSignUp}>
+            <Text style={styles.signUpButtonText}>Criar conta</Text>
+          </TouchableOpacity>
+        </>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

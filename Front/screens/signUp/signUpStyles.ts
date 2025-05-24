@@ -1,5 +1,6 @@
-// assets/styles/signUpStyles.ts
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   scrollView: {
@@ -7,100 +8,88 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   container: {
-    backgroundColor: '#000000', // Preto
+    backgroundColor: '#000000',
     alignItems: 'center',
     paddingHorizontal: 30,
-    paddingVertical: 20, // Adicionado padding vertical
+    paddingVertical: 40,
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 20,
-    alignSelf: 'flex-start', // Alinha à esquerda como na imagem
+    alignSelf: 'flex-start',
   },
   logo: {
-    width: 150, // Ajuste o tamanho conforme sua logo
-    height: 150, // Ajuste o tamanho conforme sua logo
+    width: width * 0.3,
+    height: width * 0.3,
     resizeMode: 'contain',
     marginBottom: 30,
-    // tintColor: '#FFFFFF', // Se sua logo for um ícone/vetor que pode ser tingido de branco
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#FFFFFF',
     alignSelf: 'flex-start',
-    marginBottom: 15,
-    marginTop: 10,
+    marginBottom: 20,
+    marginTop: 20,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#333333', // Cinza escuro para o fundo do input
-    borderRadius: 10,
-    marginBottom: 15, // Espaçamento entre inputs
+    backgroundColor: '#1A1A1A',
+    borderRadius: 12,
+    marginBottom: 15,
     width: '100%',
     paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   input: {
     flex: 1,
-    height: 50,
-    color: '#FFFFFF', // Texto branco
+    height: 55,
+    color: '#FFFFFF',
     fontSize: 16,
+    fontWeight: '500',
   },
   eyeIconContainer: {
     padding: 10,
   },
   eyeIconText: {
     fontSize: 20,
-    color: '#A0A0A0',
-  },
-  rowInputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 15,
-  },
-  smallInput: {
-    width: '30%', // Ajuste para caber 3 na linha com algum espaço
-    paddingHorizontal: 10, // Menor padding para inputs menores
-  },
-  middleInput: {
-    // marginHorizontal: '5%', // Para dar espaço entre os inputs da linha
+    color: '#666666',
   },
   signUpButton: {
-    backgroundColor: '#FFFFFF', // Branco
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    paddingVertical: 16,
     width: '100%',
     alignItems: 'center',
-    marginTop: 20, // Espaço antes do botão
-    marginBottom: 20, // Espaço depois do botão
+    marginTop: 30,
+    marginBottom: 20,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   signUpButtonText: {
-    color: '#000000', // Texto preto
+    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
   },
   backButton: {
-    marginTop: 10, 
-    paddingVertical: 10, 
-    paddingHorizontal: 20,
-    backgroundColor: '#555555',
-    borderRadius: 5,
-    alignSelf: 'center', 
-    marginBottom: 20, 
+    backgroundColor: '#1A1A1A',
+    borderRadius: 12,
+    paddingVertical: 16,
+    width: '100%',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   backButtonText: {
-    color: '#FFFFFF', 
-    fontSize: 16,     
-    fontWeight: 'bold', 
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

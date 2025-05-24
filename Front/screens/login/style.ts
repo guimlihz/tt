@@ -1,77 +1,76 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000', // Preto
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30,
-    marginLeft: 45,
-    marginRight: 45
   },
   logo: {
-    width: 200, // Ajuste o tamanho conforme sua logo
-    height: 200, // Ajuste o tamanho conforme sua logo
+    width: width * 0.4,
+    height: width * 0.4,
     resizeMode: 'contain',
     marginBottom: 60,
-    // Se sua logo for branca como na imagem, e o fundo já é preto,
-    // você pode precisar de uma logo com fundo transparente ou ajustar o estilo.
-    // Exemplo para logo branca:
-    // tintColor: '#FFFFFF', // Se a imagem for um ícone/vetor que pode ser tingido
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#333333', // Cinza escuro para o fundo do input
-    borderRadius: 10,
+    backgroundColor: '#1A1A1A',
+    borderRadius: 12,
     marginBottom: 20,
     width: '100%',
     paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   input: {
     flex: 1,
-    height: 50,
-    color: '#FFFFFF', // Texto branco
+    height: 55,
+    color: '#FFFFFF',
     fontSize: 16,
+    fontWeight: '500',
   },
   eyeIconContainer: {
     padding: 10,
   },
-  eyeIconText: { // Estilo para o texto do ícone de olho (placeholder)
+  eyeIconText: {
     fontSize: 20,
-    color: '#A0A0A0',
+    color: '#666666',
   },
   loginButton: {
-    backgroundColor: '#FFFFFF', // Branco
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    paddingVertical: 16,
     width: '100%',
     alignItems: 'center',
     marginBottom: 15,
-    elevation: 3, // Sombra para Android
-    shadowColor: '#000', // Sombra para iOS
+    elevation: 3,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   loginButtonText: {
-    color: '#000000', // Texto preto
+    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
   },
   signUpButton: {
-    backgroundColor: '#4A4A4A', // Cinza escuro para o botão de cadastro
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    backgroundColor: '#1A1A1A',
+    borderRadius: 12,
+    paddingVertical: 16,
     width: '100%',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#333333',
   },
   signUpButtonText: {
-    color: '#FFFFFF', // Texto branco
+    color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
 });
